@@ -66,7 +66,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@nuxtjs/i18n",
     '@nuxt/image',
-  ],
+    '@nuxt/icon',
     /* Treeshaking: https://vuetifyjs.com/en/features/treeshaking/#automatic-treeshaking */
     async (options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -75,6 +75,38 @@ export default defineNuxtConfig({
     }
   ],
 
+  icon: {
+    clientBundle: {
+      icons: [
+        'line-md:arrow-small-up',
+        'line-md:github',
+        'line-md:login',
+        'line-md:downloading-loop',
+        'line-md:file-download',
+        'line-md:gauge-full',
+        'line-md:arrow-close-up',
+        'line-md:external-link',
+        'line-md:coffee-loop',
+        'line-md:home',
+        'line-md:briefcase',
+        'line-md:folder-check',
+        'line-md:arrow-right',
+        'line-md:download',
+        'line-md:map-marker-filled',
+        'line-md:menu-to-close-transition',
+        'line-md:menu-fold-right',
+        'line-md:chat',
+        'line-md:compass-loop',
+        'line-md:logout',
+        'line-md:list-indented',
+        'line-md:question-circle',
+        'line-md:email-arrow-right',
+        'line-md:text-box-multiple',
+      ],
+      scan: true,
+      includeCustomCollections: true,
+    },
+  },
 
   // I18N Configuration
   i18n: {

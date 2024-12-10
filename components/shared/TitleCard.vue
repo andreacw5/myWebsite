@@ -20,7 +20,8 @@ defineProps({
     type: String
   },
   icon: {
-    type: String
+    type: String,
+    default: 'line-md:home'
   }
 })
 </script>
@@ -42,13 +43,11 @@ defineProps({
           :image="image"
           tile
         />
-        <v-icon
-          v-if="icon"
+        <Icon
+          :name="icon"
           class="mr-1 common-card hidden-sm-and-down"
           size="60"
-        >
-          {{ icon }}
-        </v-icon>
+        />
       </div>
     </div>
   </v-container>

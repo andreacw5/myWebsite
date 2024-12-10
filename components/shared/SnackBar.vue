@@ -25,7 +25,7 @@ const dismissTheSnack = () => {
       :title="snackbar.title"
     >
       <template #prepend>
-        <v-icon color="primary" class="icon" :icon="snackbar.icon" size="45" />
+        <Icon color="primary" class="icon" :name="snackbar.icon" size="45" />
       </template>
       <template #append>
         <v-divider class="me-2 my-n2 ml-4" vertical />

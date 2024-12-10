@@ -120,7 +120,7 @@ const appBarItems = computed(() => {
           target="_blank"
           aria-label="GitHub profile"
         >
-          <v-icon size="25">line-md:github</v-icon>
+          <Icon size="25" name="line-md:github" />
         </v-btn>
         <v-btn
           v-if="status === 'unauthenticated'"
@@ -130,7 +130,7 @@ const appBarItems = computed(() => {
           :to="localePath('/auth/login')"
           aria-label="Login"
         >
-          <v-icon size="25">line-md:login</v-icon>
+          <Icon size="25" name="line-md:login" />
         </v-btn>
 
         <v-btn v-else class="ms-1" icon rounded="lg">

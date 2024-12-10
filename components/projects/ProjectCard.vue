@@ -1,10 +1,30 @@
 <script setup lang="ts">
-import { Icon } from "@iconify/vue";
 import OptimizeImage from "~/components/shared/OptimizeImage.vue";
+
+interface ProjectCardProps {
+  item: {
+    title: {
+      it: string;
+      en: string;
+    };
+    client: {
+      name: string;
+    };
+    technical: {
+      main: {
+        color: string;
+        icon: string;
+        name: string;
+      };
+    };
+    preview: string;
+    slug: string;
+  };
+}
 
 defineProps({
   item: {
-    type: Object,
+    type: Object as PropType<ProjectCardProps['item']>,
     required: true
   },
   imageHeight: {
@@ -38,13 +58,12 @@ const currentLocaleIsItalian = computed(() => currentLocale.value === 'it-IT');
             {{ item.client.name }}
             <span class="hidden-md-and-up">
               <br>
-              <v-icon
+              <Icon
                 :color="item.technical.main.color"
                 size="15"
                 class="mr-1"
-              >
-                {{ item.technical.main.icon }}
-              </v-icon>
+                :name="item.technical.main.icon"
+              />
               Made with {{ item.technical.main.name }}
             </span>
           </span>
