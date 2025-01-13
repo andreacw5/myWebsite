@@ -151,9 +151,16 @@ const appBarItems = computed(() => {
               <v-list-item
                 link
                 prepend-icon="line-md:chat"
-                to="/ai-caller"
+                to="/admin/ai-caller"
                 title="ChatGPT Integration"
                 subtitle="Chat with an AI"
+              />
+              <v-list-item
+                link
+                prepend-icon="line-md:file"
+                to="/admin/fileharbor"
+                title="FileHarbor Dashboard"
+                subtitle="Manage files and folders"
               />
               <v-list-item
                 prepend-icon="line-md:logout"

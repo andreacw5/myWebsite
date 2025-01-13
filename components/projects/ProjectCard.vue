@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
 import OptimizeImage from "~/components/shared/OptimizeImage.vue";
+import { ref } from "vue";
 
 defineProps({
   item: {
@@ -15,6 +16,16 @@ defineProps({
 
 const currentLocale = useI18n().locale;
 const currentLocaleIsItalian = computed(() => currentLocale.value === 'it-IT');
+
+const isHovered = ref(false);
+
+const handleMouseOver = () => {
+  isHovered.value = true;
+};
+
+const handleMouseLeave = () => {
+  isHovered.value = false;
+};
 </script>
 
 <template>
@@ -52,17 +63,20 @@ const currentLocaleIsItalian = computed(() => currentLocale.value === 'it-IT');
         <template v-slot:append>
           <v-btn
             :icon="true"
-            class="round-border ma-2 card icon transition hidden-sm-and-down"
+            class="round-border ma-2 card mx-auto d-flex flex-column card hidden-sm-and-down"
             size="large"
             rounded="lg"
             tile
             alt="Project Main Technology"
+            @mouseover="handleMouseOver"
+            @mouseleave="handleMouseLeave"
           >
-            <v-icon
-              :color="item.technical.main.color"
-              size="30">
-              {{ item.technical.main.icon }}
-            </v-icon>
+            <Icon
+              :class="{ 'icon-hover': isHovered }"
+              :icon="item.technical.main.icon"
+              height="30"
+              class="icon"
+            />
           </v-btn>
         </template>
       </v-card>
@@ -71,9 +85,6 @@ const currentLocaleIsItalian = computed(() => currentLocale.value === 'it-IT');
 </template>
 
 <style scoped>
-.transition:hover {
-  transform: scale(1.3);
-}
 .title-project {
   font-size: 1.5rem;
   font-weight: 600;
@@ -85,7 +96,11 @@ const currentLocaleIsItalian = computed(() => currentLocale.value === 'it-IT');
   font-weight: 500;
   font-size: .9rem;
 }
-.v-overlay {
-  background-color: rgba(0, 0, 0, 0.9) !important;
+.icon {
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+.icon-hover {
+  transform: scale(1.3);
+  color: var(--color-primary) !important;
 }
 </style>

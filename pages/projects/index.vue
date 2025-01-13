@@ -29,6 +29,8 @@ watch(() => tab.value, async (value) => {
   loading = false;
 });
 
+const filter = shallowRef(false)
+
 const breadcrumb = [
   { title: 'Home', to: '/' },
   { title: t('projects.title'), to: '/projects', active: true },
@@ -45,6 +47,88 @@ const breadcrumb = [
           :breadcrumb="breadcrumb"
           icon="line-md:list-indented"
         />
+
+        <v-toolbar border="b" class="px-2" color="#1e1e1f">
+          <v-btn color="medium-emphasis" icon="mdi-filter" :ripple="false" @click="filter = !filter" />
+
+          <v-toolbar-title class="flex-0-1 ms-2">Filter</v-toolbar-title>
+
+          <v-divider class="mx-4 align-self-center" length="30%" vertical />
+
+          <v-btn
+            class="text-none px-0 mt-md-1"
+            :icon="$vuetify.display.mobile ? '$clear' : undefined"
+            :ripple="$vuetify.display.mobile"
+            :text="!$vuetify.display.mobile ? 'Clear filters' : undefined"
+            variant="plain"
+          />
+
+          <v-spacer />
+
+          <v-btn
+            append-icon="mdi-chevron-down"
+            class="text-none"
+            :ripple="false"
+            slim
+            variant="text"
+          >
+            Sort by
+
+            <v-menu activator="parent" location="bottom end">
+              <v-list density="compact" :lines="false" nav color="#1e1e1f">
+                <v-list-item link title="Most Popular" />
+                <v-list-item link title="Newest" />
+                <v-list-item link title="Featured" />
+                <v-list-item link title="Price: Low to High" />
+                <v-list-item link title="Price: High to Low" />
+              </v-list>
+            </v-menu>
+
+            <template #append>
+              <v-icon color="medium-emphasis" />
+            </template>
+          </v-btn>
+        </v-toolbar>
+
+        <v-expand-transition>
+          <div v-if="filter">
+            <v-container class="pa-md-6 border-b" fluid>
+              <v-row>
+                <v-defaults-provider
+                  :defaults="{
+                  VCheckboxBtn: {
+                    density: 'comfortable',
+                    color: 'primary',
+                  }
+                }"
+                >
+                  <v-col cols="12" md="6" sm="6">
+                    <v-label>Tech</v-label>
+
+                    <div class="py-4">
+                      <template v-for="tech in technologies">
+                        <v-checkbox-btn :label="tech.name" />
+                      </template>
+                    </div>
+                  </v-col>
+
+                  <v-divider v-if="$vuetify.display.smAndUp" vertical />
+
+                  <v-col cols="12" md="6" sm="6">
+                    <v-label>Size</v-label>
+
+                    <div class="py-4">
+                      <v-checkbox-btn label="Small" />
+                      <v-checkbox-btn label="Medium" />
+                      <v-checkbox-btn label="Large" />
+                    </div>
+                  </v-col>
+                </v-defaults-provider>
+              </v-row>
+            </v-container>
+          </div>
+        </v-expand-transition>
+
         <v-tabs
             v-model="tab"
             :items="technologies"
